@@ -15,7 +15,7 @@
 
 @section('contenido')
     <div class="cabecera_pagina">
-        <h5>Administrar POA presupuestos</h5>
+        <h5>Administrar POA presupuestos github</h5>
     </div>
 
     <div class="card">
