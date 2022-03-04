@@ -1,0 +1,24 @@
+.content-header{
+  padding: 20px;
+}
+
+.error-page {
+  margin: 20px auto 0;
+  padding: 10px;
+  width: 600px;
+  height: 150px;
+  /*background: powderblue;*/
+}
+
+.error-page > .headline {
+  float: left;
+  color: #ffd200;
+  font-size: 100px;
+  font-weight: 500;
+}
+
+.error-page > .error-content {
+  display: block;
+  font-size: 1.1em;
+  margin-left: 180px;
+}

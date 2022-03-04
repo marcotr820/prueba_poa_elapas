@@ -1,0 +1,599 @@
+*{
+    /*con el * indicamos que toda la pagina GENERAL toma estos estilos*/
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+}
+html {
+	height: 100%;
+}
+body
+{
+    min-height: 100%;
+    overflow-x: hidden;
+    font-family: open sans, helvetica neue, Helvetica, Arial, sans-serif;
+}
+/* componentes html */
+h5{
+    font-size: 0.95rem !important;
+}
+
+/*-----------------
+	1. MAIN
+-----------------------*/
+.main{
+    position: absolute;
+    /*acomodamos los datos del cuerpo para que no se oculten detras de la barra lateral*/
+    /* width: calc(100% - 300px); original*/
+    width: calc(100% - 250px);
+    /*movemos 300px a la derecha que es lo que ocupa la barra lateral*/
+    /* left: 300px; original*/
+    left: 250px;
+    min-height: 100vh;
+    background: #eee;
+    transition: 50ms; /*efecto mostrar y ocultar sidebar*/
+}
+/* estilo de input */
+input{
+    text-transform: uppercase;
+}
+textarea{
+    text-transform: uppercase;
+}
+input:focus, textarea:focus, select:focus {
+    background-color: #fff;
+    border-color: #1B80C2 !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.5) !important;
+}
+/* stilos para el cursor */
+::-webkit-scrollbar{
+    width: 8px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #808080;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: #999999;
+}
+/*DESPLAZAMIENTO Y OCULTAR sidebar*/
+/*.main.active{*/
+    /*al tamaño de 100% le restamos el tamaño del .sidebar.active que es 60px*/
+    /*width: calc(100% - 60px);*/
+    /*para que no afecte a los 2 lados le indicamos que solo afecto al lado left(izquierdo)*/
+    /*left: 60px;*/
+/*}*/
+
+.main.active{
+    /*al tamaño de 100% le restamos el tamaño del .sidebar.active que es 60px*/
+    width: calc(100%);
+    /*para que no afecte a los 2 lados le indicamos que solo afecto al lado left(izquierdo)*/
+    left: 0;
+}
+
+/*-----------------
+	1. MAIN END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	2. TOPBAR
+-----------------------*/
+.main .topbar
+{
+    width: 100%;
+    background: #34444c;
+    padding-left: 15px;
+    height: 55px;
+    /*display: flex; ayuda a acomodarse a cambios de tamaño*/
+    display: flex;
+    /*La propiedad CSS justify-content define cómo el navegador distribuye el espacio entre y alrededor de los items flex, a lo largo 
+    del eje principal de su contenedor.*/
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.toggle{
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: #1B80C2;
+}
+.toggle i{
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+/*esta parte configuramos el icono de esconder el panel de administracion*/
+/* .toggle::before{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    font-size: 24px;
+    text-align: center;
+    color: #111;
+} */
+/*-----------------
+	2. TOPBAR END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	3. Contenido Principal Pagina
+-----------------------*/
+.main-wrapper
+{
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.main .contenido_pagina{
+    /*damos un padding al div que almacena nuestro contenido principal de cada pagina*/
+    padding: 10px;
+    /*al contenido de la pagina le restamos el tamaño del topbar y el footer para acomodarla*/
+    min-height: calc(100vh - 90px); /*topbar 45px + footer 45px = 90px */
+    background: #eeeee4;
+}
+/*-----------------
+	3. Contenido Principal Pagina END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	4. Dropdown cerrar sesion animado
+-----------------------*/
+.nav-link{
+    display: flex;
+    color: #eee;
+    justify-content: space-between;
+    height: 40px;
+}
+.nav-link:hover{
+    color: #eee;
+}
+.dropdown-menu .dropdown-item:hover{
+    background-color: #1B80C2;
+    color: #eee;
+}
+
+/*ANIMACION DEL dropdown CERRAR SESION*/
+.animate{
+    animation-duration: 0.6s;
+    -webkit-animation-duration: 0.9;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+}
+.slideIn{
+    -webkit-animation-name: slideIn;
+    animation-name: slideIn;
+    margin-top: 10px;
+    margin: 20px;
+}
+@keyframes slideIn{
+    0%{
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(-0.7rem);
+        opacity: 1;
+    }
+    0%{
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+}
+@-webkit-keyframes slideIn{
+    0%{
+        -webkit-transform: transform;
+        -webkit-opacity: 1;
+    }
+    100%{
+        -webkit-transform: translateY(0);
+        -webkit-opacity: 1;
+    }
+    0%{
+        -webkit-transform: transform;
+        -webkit-opacity: 0;
+    }
+}
+
+/*-----------------
+	4. Dropdown cerrar sesion animado END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	5. Sidebar Menu
+-----------------------*/
+.sidebar
+{
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background: #2F4050;
+    /* overflow: hidden; */
+    overflow: auto;
+    font-family: 'Source Sans Pro', open sans, sans-serif;
+    font-weight: 500;
+}
+.sidebar .logo-details{
+    height: 55px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    cursor: default;
+    background-color: #1E282E;
+}
+.sidebar .logo-details .image img{
+    color: white;
+    height: 35px;
+    min-width: 40px;
+    text-align: center;
+    line-height: 50px;
+}
+.sidebar .logo-details .logo_name{
+    font-size: 20px;
+    color: #ddd;
+}
+.sidebar-list .bloque .titulo{
+    font-size: 0.9rem;
+    /* evitar que el texto se pueda seleccionar */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+.sidebar-list .bloque .titulo.show .flecha{
+    transform: rotate(180deg);
+}
+.sidebar-list .bloque a{
+    cursor: pointer;
+    color: #cccccc;
+	display: block;
+	font-size: 0.8rem;
+	height: auto;
+    text-decoration: none;
+	padding: 9px;
+    display: flex;
+    align-items: center;
+}
+.sidebar-list .bloque a:hover{
+    color: #fff;
+    background-color: #394d60;
+}
+.bloque .flecha{
+    margin-left: auto;
+}
+.bloque .submenu{
+    display: none;
+    margin: 4px 0;
+    /* evitar que el texto se pueda seleccionar */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+.bloque .submenu.show{
+    display: block;
+    animation: mostrar 500ms, movimiento 150ms linear;
+}
+@keyframes mostrar{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes movimiento{
+    0%{
+        transform: translateY(-10%);
+    }
+    100%{
+        transform: translateY();
+    }
+}
+.bloque .badge{
+    margin-left: auto;
+    color: #fff;
+    background-color:#c62828;
+}
+/*-----------------
+	5. Sidebar Menu END
+-----------------------*/
+/*************************************************************************************************/
+
+/*-----------------
+	6. Footer
+-----------------------*/
+.footer {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #D5D8DC;
+    width: 100%;
+    bottom: 0;
+    position: static;
+}
+/*-----------------
+	6. Footer END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	7. Toast
+-----------------------*/
+#toast-success{
+    background: #008f49;
+    color: white;
+    font-size: 1rem;
+    padding: 15px;
+    /*display: inline-block;*/
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    border-radius: 5%;
+    transform: translateY(100px);
+    transition: all 300ms;
+}
+#toast-success.show{
+    transform: translateY(0);
+}
+#toast-success i{
+    font-size: 1.5rem;
+}
+
+#toast-error{
+    background: #c62828;
+    color: white;
+    font-size: 1rem;
+    padding: 15px;
+    /*display: inline-block;*/
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    border-radius: 5%;
+    transform: translateY(100px);
+    transition: all 300ms;
+}
+
+#toast-error.show{
+    transform: translateY(0);
+}
+
+#toast-error i{
+    font-size: 1.5rem;
+}
+
+/*-----------------
+	7. Toast END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	8. ScrollTop
+-----------------------*/
+.scroll-top{
+    position: fixed;
+    z-index: 998;
+    bottom: 5px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    line-height: 45px;
+    text-align: center;
+    width: 45px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 10px;
+    /*display: none;*/
+    font-size: 30px;
+    transition: all 0.3s ease-out;
+}
+
+.ocultar-btn{   /*propiedad para ocultar el botonScroll*/
+    /*la propiedad display no es animable en css*/
+    visibility: hidden;
+    opacity: 0;
+}
+
+.scroll-top:hover{
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/*-----------------
+	8. ScrollTop END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	9. Datatable
+-----------------------*/
+table.dataTable td {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+}
+table{
+    font-size: 0.75rem;
+}
+
+/*-----------------
+	9. Datatable END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	10. Modal
+-----------------------*/
+.modal.animado{
+    opacity: 0;
+    transition: all 250ms ease-out !important;
+}
+.modal.animado.show{
+    opacity: 1;
+}
+.modal-backdrop.fade { /*color de fondo .modal*/
+    transition: opacity 0.3s ease-out !important;
+  }
+.modal.fade .modal-dialog {
+    transform: translate(0, -50px);
+    transition: transform 250ms ease-out !important;
+}
+.modal.show .modal-dialog {
+    transform: translate(0, 0) !important;
+}
+
+/*-----------------
+	10. Modal END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	11. Loader
+-----------------------*/
+.body-fondo{    /*colocamos color al body por que se muestra antes que cargue el loader pantalla blanca*/
+    background-color: #282828 !important;
+}
+#loader-wrapper {
+	background-color: #282828 !important;
+	bottom: 0 !important;
+	height: 100% !important;
+	left: 0 !important;
+	position: fixed !important;
+	right: 0 !important;
+	top: 0 !important;
+	width: 100% !important;
+	z-index: 9999 !important;
+}
+#loader {
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 200px;
+	left: 50%;
+	margin: -100px 0 0 -100px;
+	position: absolute;
+	top: 50%;
+	width: 200px;
+}
+.loader-ellips {
+	font-size: 1.2rem;
+	position: relative;
+	width: 64px;
+	margin: 100px auto 0;
+}
+.loader-ellips__dot {
+	display: block;
+	width: 1em;
+	height: 1em;
+	border-radius: 0.5em;
+	position: absolute;
+	animation-duration: 0.5s;
+	animation-timing-function: ease;
+	animation-iteration-count: infinite;
+}
+.loader-ellips__dot:nth-child(1),
+.loader-ellips__dot:nth-child(2) {
+	left: 0;  
+}
+.loader-ellips__dot:nth-child(3) { 
+	left: 1.5em;   
+}
+.loader-ellips__dot:nth-child(4) { 
+	left: 3em;   
+}
+.loader-ellips__dot:nth-child(1) {
+	animation-name: reveal;  
+}
+.loader-ellips__dot:nth-child(2),
+.loader-ellips__dot:nth-child(3) {
+	animation-name: slide;
+}
+.loader-ellips__dot:nth-child(4) {
+	animation-name: reveal;
+	animation-direction: reverse;
+}
+@keyframes reveal {
+	from { 
+		transform: scale(0.001); 
+	}
+	to { 
+		transform: scale(1); 
+	}
+}
+@keyframes slide {
+	to { 
+		transform: translateX(1.5em) 
+	}
+}
+.loader-ellips__dot:nth-child(1) { 
+	background: #aaa;  
+}
+.loader-ellips__dot:nth-child(2) { 
+	background: #3490dc;  
+}
+.loader-ellips__dot:nth-child(3) { 
+	background: #aaa;  
+}
+.loader-ellips__dot:nth-child(4) { 
+	background: #3490dc;  
+}
+
+/*-----------------
+	11. Loader END
+-----------------------*/
+/*************************************************************************************************/
+/*-----------------
+	12. Toast SweetAlert2
+-----------------------*/
+.colored-toast.swal2-icon-success {
+    background-color: #28a745 !important;
+  }
+  
+  .colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+  }
+  
+  .colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+  }
+  
+  .colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+  }
+  
+  .colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+  }
+  
+  .colored-toast .swal2-title {
+    color: white;
+  }
+  
+  .colored-toast .swal2-close {
+    color: white;
+  }
+  
+  .colored-toast .swal2-html-container {
+    color: white;
+  }
+  
+/*-----------------
+	12. Toast SweetAlert2 END
+-----------------------*/
+/*-----------------
+	13. buttons boostrap START
+-----------------------*/
+.btn-xm, .btn-group-xm > .btn {
+    padding: 1px 5px !important;
+    font-size: 12px !important;
+}
+/*-----------------
+	13. buttons boostrap END
+-----------------------*/
